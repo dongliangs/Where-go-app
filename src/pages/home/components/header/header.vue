@@ -1,10 +1,10 @@
 <template>
   <header>
     <div class="header-left">
-        <i class="iconfont back-icon">&#xe624;</i>
+        <i class="iconfont back-icon">&#xe658;</i>
     </div>
-    <div class="header-input"><i class="iconfont">&#xe632;</i><input type="text" placeholder="输入城市/景点/游玩主题"></div>
-    <div class="header-right">城市<i class="iconfont arrow-icon">&#xe64a;</i></div>
+    <div class="header-input"><i class="iconfont icon-search">&#xeb9c;</i><input type="text" placeholder="输入城市/景点/游玩主题"></div>
+    <div class="header-right">城市<i class="iconfont arrow-icon">&#xe65a;</i></div>
   </header>
 </template>
 <script>
@@ -27,7 +27,7 @@ export default {
             .back-icon {
                 display: block;
                 text-align: center;
-                font-size: .4rem;
+                font-size: .52rem;
             }
         }
         .header-input {
@@ -48,7 +48,7 @@ export default {
             float: right;
             text-align: center;
             .arrow-icon {
-                font-size: .20rem;
+                font-size: .30rem;
             }
         }
     }

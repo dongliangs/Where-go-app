@@ -85,6 +85,10 @@ export default {
 
 <style lang="scss" scoped>
     @import '~@/assets/styles/public.scss';
+    .icons {
+        background-color: $white;
+        padding: .2rem 0;
+    }
     .icons >>> .swiper-container {
       height:0;
       padding-bottom:50%;

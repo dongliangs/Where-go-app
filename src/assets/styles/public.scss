@@ -1,8 +1,14 @@
 $white: #ffffff;
+$fontGray: #616161;
 $bgColor: #00bcd4;
 
 @mixin ellipse {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+@mixin popular-desc {
+    font-size: .24rem;
+    color: #212121;
+    line-height: .32rem;
 }
