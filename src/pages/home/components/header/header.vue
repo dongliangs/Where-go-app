@@ -4,12 +4,17 @@
         <i class="iconfont back-icon">&#xe658;</i>
     </div>
     <div class="header-input"><i class="iconfont icon-search">&#xeb9c;</i><input type="text" placeholder="输入城市/景点/游玩主题"></div>
-    <div class="header-right">城市<i class="iconfont arrow-icon">&#xe65a;</i></div>
+    <router-link to="/city">
+        <div class="header-right">{{city}}<i class="iconfont arrow-icon">&#xe65a;</i></div>
+    </router-link>
   </header>
 </template>
 <script>
 export default {
-  name: 'HomeHeader'
+  name: 'HomeHeader',
+  props:{
+      city: String
+  }
 }
 </script>
 
@@ -47,6 +52,7 @@ export default {
             width: 1.24rem;
             float: right;
             text-align: center;
+            color:#fff;
             .arrow-icon {
                 font-size: .30rem;
             }

@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <home-header></home-header>
+    <home-header :city="city"></home-header>
     <home-swiper></home-swiper>
     <home-icons></home-icons>
     <PopularList></PopularList>
@@ -15,6 +15,8 @@ import HomeIcons from './components/icons'
 import PopularList from './components/PopularList'
 import Recommend from './components/recommend'
 import HomeWeekend from './components/weekend'
+
+import axios from 'axios'
 export default {
   name: 'Home',
   components: {
@@ -24,7 +26,28 @@ export default {
     PopularList,
     Recommend,
     HomeWeekend
+  },
+  data () {
+    return {
+      city:''
+    }
+  },
+  methods: {
+    getHomeInfo(){
+      this.$http.get('/api/index.json')
+        .then(res => {
+          res = res.data;
+          let result = JSON.parse(JSON.stringify(res));
+          if (result.ret){
+            console.log(result.dataList.city)
+          }
+        })
+    }
+  },
+  mounted (){
+    this.getHomeInfo()
   }
+ 
 }
 </script>
 
