@@ -1,11 +1,11 @@
 <template>
   <div class="main">
     <home-header :city="city"></home-header>
-    <home-swiper></home-swiper>
-    <home-icons></home-icons>
-    <PopularList></PopularList>
-    <recommend></recommend>
-    <home-weekend></home-weekend>
+    <home-swiper :list="swiperList"></home-swiper>
+    <home-icons :icons="iconsList"></home-icons>
+    <PopularList :hotList="hotList"></PopularList>
+    <recommend :like="recommend"></recommend>
+    <home-weekend :weekend="weekend"></home-weekend>
   </div>
 </template>
 <script>
@@ -16,7 +16,6 @@ import PopularList from './components/PopularList'
 import Recommend from './components/recommend'
 import HomeWeekend from './components/weekend'
 
-import axios from 'axios'
 export default {
   name: 'Home',
   components: {
@@ -29,19 +28,30 @@ export default {
   },
   data () {
     return {
-      city:''
+      city:'',
+      swiperList:[],
+      iconsList: [],
+      hotList: [],
+      recommend: [],
+      weekend: []
     }
   },
   methods: {
     getHomeInfo(){
-      this.$http.get('/api/index.json')
-        .then(res => {
-          res = res.data;
-          let result = JSON.parse(JSON.stringify(res));
-          if (result.ret){
-            console.log(result.dataList.city)
-          }
-        })
+      this.$http.get('./api/index.json')
+        .then(this.handleGetHomeInfo)
+    },
+    handleGetHomeInfo (res) {
+      const result = res.data;
+      if(res.status == 200 && result.ret){
+        const dt = result.data;
+        this.city = dt.city;
+        this.swiperList = dt.swiperList;
+        this.iconsList = dt.iconList;
+        this.hotList = dt.recommendList;
+        this.recommend = dt.recommendList;
+        this.weekend = dt.weekendList
+      }
     }
   },
   mounted (){

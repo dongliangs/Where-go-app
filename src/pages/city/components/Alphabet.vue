@@ -1,15 +1,15 @@
 <template>
     <ul class="alphabet">
-        <li class="alphabet-item">A</li>
-        <li class="alphabet-item">A</li>
-        <li class="alphabet-item">A</li>
-        <li class="alphabet-item">A</li>
+        <li class="alphabet-item" v-for="(item, key) of cities" :key="key">{{key}}</li>
     </ul>
 </template>
 
 <script>
 export default {
-    name: 'CityAlphabet'
+    name: 'CityAlphabet',
+    props:{
+        cities: Object
+    }
 }
 </script>
 

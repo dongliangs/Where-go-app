@@ -19,90 +19,21 @@
                     热门城市
                 </div>
                 <div class="button-list">
-                    <div class="button-wrapper">
-                        <span class="button">北京</span>
-                    </div>
-                    <div class="button-wrapper">
-                        <span class="button">北京</span>
-                    </div>
-                    <div class="button-wrapper">
-                        <span class="button">北京</span>
-                    </div>
-                    <div class="button-wrapper">
-                        <span class="button">北京</span>
-                    </div>
-                    <div class="button-wrapper">
-                        <span class="button">北京</span>
-                    </div>
-                    <div class="button-wrapper">
-                        <span class="button">北京</span>
-                    </div>
-                    <div class="button-wrapper">
-                        <span class="button">北京</span>
+                    <div class="button-wrapper" v-for="item of hot" :key="item.id">
+                        <span class="button">{{item.name}}</span>
                     </div>
                 </div>
             </div>
-            <div class="area">
+            <div class="area" v-for="(item, key) of cities" :key="key">
                 <div class="title border-topbottom">
-                    A
+                    {{key}}
                 </div>
                 <ul class="item-list">
-                    <li class="item border-bottom">
-                        安娜
-                    </li>
-                    <li class="item border-bottom">
-                        安娜
-                    </li>
-                    <li class="item border-bottom">
-                        安娜
-                    </li>
-                    <li class="item border-bottom">
-                        安娜
-                    </li>
-                    <li class="item border-bottom">
-                        安娜
+                    <li class="item border-bottom" v-for="innerItem of item" :key="innerItem.id">
+                        {{innerItem.name}}
                     </li>
                 </ul>
-                <div class="title border-topbottom">
-                    A
-                </div>
-                <ul class="item-list">
-                    <li class="item border-bottom">
-                        安娜
-                    </li>
-                    <li class="item border-bottom">
-                        安娜
-                    </li>
-                    <li class="item border-bottom">
-                        安娜
-                    </li>
-                    <li class="item border-bottom">
-                        安娜
-                    </li>
-                    <li class="item border-bottom">
-                        安娜
-                    </li>
-                </ul>
-                <div class="title border-topbottom">
-                    A
-                </div>
-                <ul class="item-list">
-                    <li class="item border-bottom">
-                        阿拉尔
-                    </li>
-                    <li class="item border-bottom">
-                        安娜
-                    </li>
-                    <li class="item border-bottom">
-                        安娜
-                    </li>
-                    <li class="item border-bottom">
-                        安娜
-                    </li>
-                    <li class="item border-bottom">
-                        安娜
-                    </li>
-                </ul>
+            
             </div>
         </div>
     </div>
@@ -112,6 +43,10 @@
 import Bscroll from 'better-scroll';
 export default {
     name: 'CityList',
+    props: {
+        hot: Array,
+        cities: Object
+    },
     mounted(){
         this.scroll = new Bscroll(this.$refs.wrapper)
     }
@@ -142,9 +77,7 @@ export default {
         }
     }   
     .title{
-        padding-left: .2rem;
-        height:.54rem;
-        line-height: .54rem;
+        padding: .2rem 0 .2rem .2rem;
         background:#eee;
         font-size: .26rem;
         color: #666666;

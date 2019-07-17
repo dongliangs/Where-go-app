@@ -5,7 +5,7 @@
             <span>本周热门榜单</span>
         </div>
         <ul class="popular-hotsale-list">
-            <li class="popular-hostsale-item" v-for="item in hostsaleList" :key="item.id">
+            <li class="popular-hostsale-item" v-for="item in hotList" :key="item.id">
                 <a href="javascript:;">
                     <div class="hostsale-tag" v-if="item.topImg">
                         <img :src="item.topImg" alt="">
@@ -30,50 +30,8 @@
 <script>
 export default {
     name: 'PopularList',
-    data () {
-        return {
-            hostsaleList: [
-                {
-                    id: '0.1',
-                    imgUrl: 'http://img1.qunarzz.com/sight/p0/1607/7c/7cda8b6782dabd80b4.img.jpg_250x250_57ac4faa.jpg',
-                    topImg: 'http://img1.qunarzz.com/piao/fusion/1710/ab/159673b63e6ca702.png',
-                    descTitle: '上海迪士尼乐园',
-                    price:'538'
-                },
-                {
-                    id: '0.2',
-                    imgUrl: 'http://img1.qunarzz.com/sight/p0/1811/e4/e4b9b471d2afc473a3.img.jpg_250x250_963fe222.jpg',
-                    topImg: 'http://img1.qunarzz.com/piao/fusion/1710/2d/36d0c4adaebbbc02.png',
-                    descTitle: '上海欢乐谷',
-                    price:'213'
-                },
-                {
-                    id: '0.3',
-                    imgUrl: 'http://img1.qunarzz.com/sight/p0/1906/19/19b7939928a0200da3.img.jpg_250x250_170cb921.jpg',
-                    topImg: 'http://img1.qunarzz.com/piao/fusion/1710/67/edc47ffef9e96b02.png',
-                    descTitle: '上海海昌海洋公园',
-                    price:'159'
-                },
-                {
-                    id: '0.4',
-                    imgUrl: 'http://img1.qunarzz.com/tuan/team2/1507/2c/83e0e0e7ae082a.jpg_250x250_87692c41.jpg',
-                    descTitle: '东方明珠',
-                    price:'70'
-                },
-                {
-                    id: '0.5',
-                    imgUrl: 'http://img1.qunarzz.com/sight/p0/1904/d5/d579b03a110d75a8a3.img.jpg_250x250_cf952d13.jpg',
-                    descTitle: '上海野生动物园',
-                    price:'538'
-                },
-                {
-                    id: '0.6',
-                    imgUrl: 'http://img1.qunarzz.com/sight/p0/1803/26/2645c1b2ee526285a3.water.jpg_250x250_c9ab8185.jpg',
-                    descTitle: '上海迪士尼乐园',
-                    price:'538'
-                }
-            ]
-        }
+    props:{
+        hotList: Array
     }
 }
 </script>
