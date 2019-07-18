@@ -15,7 +15,7 @@ import HomeIcons from './components/icons'
 import PopularList from './components/PopularList'
 import Recommend from './components/recommend'
 import HomeWeekend from './components/weekend'
-
+import { mapState } from 'vuex'
 export default {
   name: 'Home',
   components: {
@@ -28,6 +28,7 @@ export default {
   },
   data () {
     return {
+      firstCity: '',
       swiperList:[],
       iconsList: [],
       hotList: [],
@@ -35,9 +36,12 @@ export default {
       weekend: []
     }
   },
+  computed: {
+    ...mapState(['city']) //映射
+  },
   methods: {
     getHomeInfo(){
-      this.$http.get('./api/index.json')
+      this.$http.get('/api/index.json?city='+ this.city)
         .then(this.handleGetHomeInfo)
     },
     handleGetHomeInfo (res) {
@@ -53,7 +57,16 @@ export default {
     }
   },
   mounted (){
+    this.firstCity = this.city;
+    console.log('mounted')
     this.getHomeInfo()
+  },
+  activated () { //当页面重新显示的时候会执行
+    if (this.firstCity !== this.city) {
+      this.getHomeInfo()
+      this.firstCity = this.city
+    }
+    console.log('activeted')
   }
  
 }
