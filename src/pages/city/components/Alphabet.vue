@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import { clearTimeout, setTimeout } from 'timers';
 export default {
     name: 'CityAlphabet',
     props:{
@@ -17,7 +18,9 @@ export default {
     },
     data () {
         return {
-            touchStatus: false //定义标识位
+            touchStatus: false, //定义标识位
+            startY: 0,
+            timer: null
         }
     },
     computed: {
@@ -29,6 +32,9 @@ export default {
             return letters;
         }
     },
+    updated () {
+        this.startY = this.$refs['A'][0].offsetTop
+    },
     methods: {
         handleLetterClick(e){
             //console.log(e.target.innerText)
@@ -39,14 +45,18 @@ export default {
         },
         handleTouchMove (e) {
             if (this.touchStatus) {
-                const startY = this.$refs['A'][0].offsetTop //获取首字母距离滚动顶部的大小
-                const touchY = e.touches[0].clientY - 79
-                //console.log(touchY)
-                const index = Math.floor((touchY - startY) / 25)
-                if (index >= 0 && index < this.letters.length){
-                    this.$emit('change', this.letters[index])
-                }
-               
+               //获取首字母距离滚动顶部的大小
+               if(this.timer){
+                   clearTimeout(this.timer)
+               }
+               this.timer = setTimeout( ()=> {  //函数节流
+                    const touchY = e.touches[0].clientY - 79
+                    //console.log(touchY)
+                    const index = Math.floor((touchY - this.startY) / 25)
+                    if (index >= 0 && index < this.letters.length){
+                        this.$emit('change', this.letters[index])
+                    }
+               },10)
             }
         },
         handleTouchEnd () {
