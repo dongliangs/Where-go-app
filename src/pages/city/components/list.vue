@@ -7,10 +7,7 @@
                 </div>
                 <div class="button-list">
                     <div class="button-wrapper">
-                        <span class="button">上海</span>
-                    </div>
-                    <div class="button-wrapper">
-                        <span class="button">北京</span>
+                        <span class="button">{{this.currentCity}}</span>
                     </div>
                 </div>
             </div>
@@ -19,7 +16,8 @@
                     热门城市
                 </div>
                 <div class="button-list">
-                    <div class="button-wrapper" v-for="item of hot" :key="item.id">
+                    <div class="button-wrapper" v-for="item in hot" 
+                    :key="item.id"  @click="handleCityClick(item.name)">
                         <span class="button">{{item.name}}</span>
                     </div>
                 </div>
@@ -30,7 +28,7 @@
                     {{key}}
                 </div>
                 <ul class="item-list">
-                    <li class="item border-bottom" v-for="innerItem of item" :key="innerItem.id">
+                    <li class="item border-bottom" v-for="innerItem of item" :key="innerItem.id" @click="handleCityClick(innerItem.name)">
                         {{innerItem.name}}
                     </li>
                 </ul>
@@ -42,6 +40,7 @@
 
 <script>
 import Bscroll from 'better-scroll';
+import { mapState, mapMutations } from 'vuex'
 export default {
     name: 'CityList',
     props: {
@@ -49,8 +48,19 @@ export default {
         cities: Object,
         letter: String
     },
-    mounted(){
-        this.scroll = new Bscroll(this.$refs.wrapper)
+    computed: {
+        ...mapState({
+            currentCity: 'city'
+        })
+    },
+    methods: {
+        handleCityClick (city) {
+            //this.$store.commit('changeHot', city)
+            this.changeHot(city)
+            this.$router.push('/')
+           // console.log(city)
+        },
+        ...mapMutations(['changeHot'])
     },
     watch: {
         letter(){
@@ -61,6 +71,9 @@ export default {
             }
             //console.log(this.letter)
         }
+    },
+    mounted(){
+        this.scroll = new Bscroll(this.$refs.wrapper, { mouseWheel: true, click: true, tap: true })
     }
 }
 </script>
